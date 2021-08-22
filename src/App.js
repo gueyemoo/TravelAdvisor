@@ -21,6 +21,7 @@ const App = () => {
     const [coordinates, setCoordinates] = useState({});
     const [bounds, setBounds] = useState({});
 
+
     const [isLoading, setisLoading] = useState(false)
 
     useEffect(() => {
@@ -32,28 +33,28 @@ const App = () => {
     useEffect(() => {
         setisLoading(true);
 
-        if(bounds){
+        if(bounds.sw && bounds.ne){
             
             getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-                console.log(data);
                 
-                setPlaces(data);
+                setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
                 setFilteredPlaces([]);
+                setRating('');
                 setisLoading(false);
             });
         }
-    }, [type, coordinates, bounds]);
+    }, [type, bounds]);
 
     useEffect(() => {
         const filtered = places.filter((place) => Number(place.rating) > rating);
 
         setFilteredPlaces(filtered);
-    }, [places, rating]);
+    }, [rating]);
 
     return (
         <>
             <CssBaseline />
-            <Header />
+            <Header setCoordinates={setCoordinates} />
             <Grid container spacing={3} style={{ width: '100%' }}>
                 <Grid item xs={12} md={4}>
                     <List 
