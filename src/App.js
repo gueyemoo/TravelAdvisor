@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core';
 
-import { getPlacesData } from './api';
+import { getPlacesData, getWeatherData } from './api';
 import Header from './components/Header/Header';
 import List from './components/List/List';
 import Map from './components/Map/Map';
@@ -20,6 +20,7 @@ const App = () => {
 
     const [coordinates, setCoordinates] = useState({});
     const [bounds, setBounds] = useState({});
+    const [WeatherData, setWeatherData] = useState([])
 
 
     const [isLoading, setisLoading] = useState(false)
@@ -34,6 +35,8 @@ const App = () => {
         setisLoading(true);
 
         if(bounds.sw && bounds.ne){
+
+            getWeatherData(coordinates.lat, coordinates.lng).then((data) => setWeatherData(data));
             
             getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
                 
@@ -74,6 +77,7 @@ const App = () => {
                         coordinates={coordinates}
                         places={filteredPlaces.length ? filteredPlaces : places}
                         setChildClicked={setChildClicked}
+                        WeatherData={WeatherData}
                     />
                 </Grid>
             </Grid>
