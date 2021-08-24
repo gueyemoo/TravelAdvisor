@@ -1,7 +1,7 @@
 # Travel Advisor App
 
 
-![Capture d’écran 2021-08-23 021850](https://user-images.githubusercontent.com/39363844/130375199-a3c935bc-faa5-47f3-847e-5d0678314f82.png)
+![Website image](https://user-images.githubusercontent.com/39363844/130375199-a3c935bc-faa5-47f3-847e-5d0678314f82.png)
 
 ## Summary
 
